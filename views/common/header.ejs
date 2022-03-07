@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><i class="bi bi-nut"></i> Abalone</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+            <div class="d-flex">
+                <% if(opt.connected == false){ %>
+                <label for="login_btn" class="navbar-text" style="margin-right: 1em;">Not connected</label>
+                <a id="login_btn" class="btn btn-primary" href="/login">Login</a>
+                <% }else{%>
+                    <label for="login_btn" class="navbar-text" style="margin-right: 1em;"><%= opt.user.displayName %></label>
+                    <a id="login_btn" class="btn btn-danger" href="/disconnect">Disconnect</a>
+                <% }%>
+            </div>
+        </div>
+    </div>
+</nav>

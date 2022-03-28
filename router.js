@@ -15,6 +15,12 @@ mainRouter.get("/",(req,res) => {
     Show(res,mc.GetGlobalOption(req,"main"));
 });
 
+mainRouter.get("/game/:id",(req,res) => {
+    let option = mc.GetGlobalOption(req,"game");
+    option["gid"] = req.params.id
+    Show(res,option);
+});
+
 mainRouter.get("/login",(req,res) => {
 
     Show(res,mc.GetGlobalOption(req,"login"));
@@ -54,9 +60,9 @@ mainRouter.get("/new",(req,res)=> {
         return
     }   
 
-    mc.CreateGame(req.session.userId);
+    let gameId = mc.CreateGame(req.session.userId);
 
-    res.redirect("/game");
+    res.redirect("/game/"+gameId);
 
 });
 

@@ -78,6 +78,8 @@ class MainController{
 
         this.games.set(newGame.id,newGame);
         console.log("New game :",newGame.id," Created by ",this.users.get(userId).displayName);
+
+        return newGame.id
     }
 
 }

@@ -1,8 +1,16 @@
 const Express = require("express");
+const sessions = require('express-session');
 const app = Express();
+
+app.use(sessions({
+    secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
+    saveUninitialized:true,
+    resave: false 
+}));
 
 app.use(Express.urlencoded({extended:true}));
 
+app.use(Express.static('public'))
 
 //load router
 const fs = require("fs");

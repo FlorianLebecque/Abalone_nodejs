@@ -2,7 +2,13 @@
 <html lang="en">
     <%- include("public/head.html") %>
     <body>
-        
+        <%- include("modules/nav.ejs") %>
+
+        <% if(info.page != "index") { %>
+        <%- include("pages/"+info.page+".ejs"); %>
+        <% } %>
+
+
     </body>
     
 </html>

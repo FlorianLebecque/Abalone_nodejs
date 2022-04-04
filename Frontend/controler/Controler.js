@@ -2,16 +2,26 @@
 class Controler{
 
     constructor(){
-
         this.users = new Map();
-        this.games = new Map();
 
     }
 
 
-    SocketConnection(socket){
-        console.log("User connected");
-        console.log(this);
+    GetOption(req) {
+        let user = this.getCurrentUser(req);
+
+        return {
+            user    : user.name,
+            id      : user.id,
+            page    : "index"
+        };
+    }
+
+    getCurrentUser(req){
+        if(this.users.has(req.session.id)){
+            return this.users.get(req.session.id);
+        }
+        return {name : -1, id : -1};
     }
 
 

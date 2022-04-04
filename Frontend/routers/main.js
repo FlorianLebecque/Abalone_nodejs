@@ -6,7 +6,20 @@ const MainRouter = Express.Router();
 
 MainRouter.get("/",async (req,res)=>{
 
-    res.render("index.ejs");
+    let options = ctrl.GetOption(req);
+
+    res.render("index.ejs",info = options);
+
+});
+
+MainRouter.get("/login",(req,res)=>{
+
+    let options = ctrl.GetOption(req);
+
+    options["page"] = "login";
+
+    res.render("index.ejs",info = options);
+
 
 });
 

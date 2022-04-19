@@ -32,8 +32,11 @@ const md_rooms = {
     },
 
     async CreateRoom(room_form){
+
+        
+
         let res = await this.checkToken(room_form.player,room_form.token)
-        if(res.id != ""){
+        if(res){
 
             if(this.IsPlayerInRoom(room_form.player)){
                 throw {code:403,err:"Player is already in room"}; 

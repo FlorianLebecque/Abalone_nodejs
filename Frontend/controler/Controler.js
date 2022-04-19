@@ -8,22 +8,21 @@ class Controler{
 
 
     GetOption(req) {
-        let user = this.getCurrentUser(req);
+        let current_user = this.getCurrentUser(req);
 
         return {
-            user    : user.name,
-            id      : user.id,
+            user    : current_user.name,
+            id      : current_user.id,
             page    : "index"
         };
     }
 
     getCurrentUser(req){
-        if(this.users.has(req.session.id)){
-            return this.users.get(req.session.id);
+        if(this.users.has(req.session.userid)){
+            return this.users.get(req.session.userid);
         }
         return {name : -1, id : -1};
     }
-
 
 
 }

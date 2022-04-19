@@ -69,15 +69,19 @@ const users = {
                 });
 
                 if(result){
-                    return token_n;
+                    return {
+                        token:  token_n,
+                        id:     user.id,
+                        name:   user.name
+                    };
                 }
                 
             }
-            throw {code:400,err:"User or password incorrect"};
+            throw {code:403,err:"User or password incorrect"};
 
         }
 
-        throw {code:400,err:"User or password incorrect"};
+        throw {code:403,err:"User or password incorrect"};
     }
 
 };

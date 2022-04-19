@@ -1,8 +1,12 @@
 
+const User = require("../models/user");
+
+
 class Controler{
 
     constructor(){
-        this.test = "a";
+        this.rooms = new Map();
+
     }
 
     Modules(){
@@ -15,6 +19,17 @@ class Controler{
 
     CheckObj(obj,key_array){
         return key_array.every(function(val) { return Object.keys(obj).indexOf(val) >= 0; })
+    }
+
+    async checkToken(username,usr_token){
+
+        let user = await User.findOne({where:{name:username,token:usr_token}}).then(data=>{
+            return data;
+        }).catch(err=>{
+            throw {code:500,err:"Internal server error"};
+        })
+
+        return user;
     }
 
 }

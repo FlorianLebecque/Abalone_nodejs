@@ -10,6 +10,10 @@ MainRouter.get("/",async (req,res)=>{
 
     console.log(options);
 
+    let rooms = await ctrl.GetRooms();
+
+    options["rooms"] = rooms;
+
     res.render("index.ejs",info = options);
 
 });

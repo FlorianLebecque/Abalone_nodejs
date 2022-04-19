@@ -5,9 +5,10 @@
         <%- include("modules/nav.ejs") %>
 
         <% if(info.page != "index") { %>
-        <%- include("pages/"+info.page+".ejs"); %>
+            <%- include("pages/"+info.page+".ejs"); %>
+        <% }else{ %>
+            <%- include("pages/rooms.ejs"); %>
         <% } %>
-
 
     </body>
     

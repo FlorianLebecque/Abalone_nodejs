@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="row">
+        <h1 class="display-1">Rooms
+
+        <a class="btn btn-lg btn-outline-success " href="/add">+</a></h1>
+
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Player 1</th>
+                <th scope="col">Player 2</th>
+                <th scope="col">Join</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% info.rooms.forEach(room => { %>
+                    <tr>
+                        <th><%= room.player_1 %></th>
+                        <% if(room.player_2 == -1){ %>
+                            <th></th>
+
+                            <th><a class="btn  btn-primary" href="/join/<%= room.id %> ">Join</a></th>
+                        <% }else{ %>
+                            <th><%= room.player_2 %> </th>
+                            <th><a class="btn btn-outline-secondary disabled" href="/join/">full</a></th>
+                        <% }%>
+                        
+                    </tr>
+                <% });%>
+            </tbody>
+          </table>
+
+    </div>
+
+</div>

@@ -4,6 +4,12 @@
     <body>
         <%- include("modules/nav.ejs") %>
 
+        <% if (info.code != 0){ %>
+        <div class="notice notice-bad">
+            Error, <%= info.msg %>
+        </div>
+        <% } %>
+
         <% if(info.page != "index") { %>
             <%- include("pages/"+info.page+".ejs"); %>
         <% }else{ %>

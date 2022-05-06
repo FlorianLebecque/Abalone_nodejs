@@ -13,7 +13,9 @@ class Controler{
         return {
             user    : current_user.name,
             id      : current_user.id,
-            page    : "index"
+            page    : "index",
+            code    : 0,
+            msg     : 0
         };
     }
 

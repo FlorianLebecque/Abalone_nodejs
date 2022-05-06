@@ -33,10 +33,10 @@ roomRoute.post("/add",async (req,res) => {
 
 roomRoute.post("/join",async (req,res) => {
 
-    let log_form = req.body;
+    let room_form = req.body;
 
     try {
-        let response = await ctrl.Login(log_form);
+        let response = await ctrl.JoinRoom(room_form);
 
         if(response){
             res.json(response);

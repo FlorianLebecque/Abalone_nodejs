@@ -1,7 +1,27 @@
 
+:root {
+    --textColor: #fff;
+    --white: #ffffff;
+  }
+
+
+body{
+    /*
+    background-image: url("back.png");
+    color: var(--textColor);
+    */
+}
+
+nav{
+    /*
+    box-shadow: 10px 10px 49px 4px rgba(255,255,255,0.29);
+    -webkit-box-shadow: 10px 10px 49px 4px rgba(255,255,255,0.29);
+    -moz-box-shadow: 10px 10px 49px 4px rgba(255,255,255,0.29);
+    */
+}
 
 .loginbar{
-    background-color: #f8f9fa;
+    background-color: transparent;
     border: none;
     margin-top: 1em;
 }

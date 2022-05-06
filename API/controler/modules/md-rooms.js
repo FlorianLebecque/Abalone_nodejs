@@ -33,6 +33,14 @@ const md_rooms = {
 
     async CreateRoom(room_form){
 
+        try {
+            if(!this.CheckObj(room_form,["player","token"])){
+                throw {code:400,err:"Incomplete forms"};
+            }
+        } catch (error) {
+            throw {code:400,err:"Incomplete forms"};
+        }
+
         let res = await this.checkToken(room_form.player,room_form.token)
         if(res){
 
@@ -59,6 +67,15 @@ const md_rooms = {
     },
 
     async JoinRoom(room_form){
+        
+        try {
+            if(!this.CheckObj(room_form,["player","token","roomId"])){
+                throw {code:400,err:"Incomplete forms"};
+            }
+        } catch (error) {
+            throw {code:400,err:"Incomplete forms"};
+        }
+
         let res = await this.checkToken(room_form.player,room_form.token)
         if(res){
 
@@ -71,6 +88,32 @@ const md_rooms = {
             room.player_2 = room_form.player
 
             return room;
+
+        }else{
+            throw {code:403,err:"Invalid user or token or room id"}; 
+        }
+    },
+
+    async StartRoom(room_form){
+
+        try {
+            if(!this.CheckObj(room_form,["player","token","roomId"])){
+                throw {code:400,err:"Incomplete forms"};
+            }
+        } catch (error) {
+            throw {code:400,err:"Incomplete forms"};
+        }
+
+        let res = await this.checkToken(room_form.player,room_form.token)
+        if(res){
+
+            let room = this.rooms.get(room_form.roomId);
+
+            
+            room.started = room.player_1 == room_form.player;
+            
+
+            return room.started;
 
         }else{
             throw {code:403,err:"Invalid user or token or room id"}; 

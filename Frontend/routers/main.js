@@ -8,9 +8,15 @@ MainRouter.get("/",async (req,res)=>{
 
     let options = ctrl.GetOption(req);
 
-    console.log(options);
-
     let rooms = await ctrl.GetRooms();
+
+    if(req.query.code){
+        options["code"] = req.query.code;
+    }
+
+    if(req.query.msg){
+        options["msg"]  = req.query.msg;
+    }
 
     options["rooms"] = rooms;
 

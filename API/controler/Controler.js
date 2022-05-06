@@ -26,7 +26,7 @@ class Controler{
         let user = await User.findOne({where:{name:username,token:usr_token}}).then(data=>{
             return data;
         }).catch(err=>{
-            throw {code:500,err:"Internal server error"};
+            throw {code:403,err:"Bad user or token"};
         })
 
         return user;

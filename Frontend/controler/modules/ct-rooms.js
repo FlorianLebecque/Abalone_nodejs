@@ -15,6 +15,48 @@ const ct_rooms = {
         const data = await response.json();
 
         return data;
+    },
+
+    async CreateRooms(room_form){
+
+        const url = "http://127.0.0.1:3001"
+
+        const response = await fetch(url+"/rooms/add",{
+            method:     "post",
+            body: JSON.stringify(room_form),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if(response.status == 200){
+            return data;
+        }else{
+            throw {"code":response.status,"msg":data}
+        }
+
+    },
+
+    async JoinRoom(room_form){
+        const url = "http://127.0.0.1:3001"
+
+        const response = await fetch(url+"/rooms/join",{
+            method:     "post",
+            body: JSON.stringify(room_form),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const data = await response.json();
+
+        if(response.status == 200){
+            return data;
+        }else{
+            throw {"code":response.status,"msg":data}
+        }
     }
     
 }

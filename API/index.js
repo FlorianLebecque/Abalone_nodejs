@@ -9,7 +9,7 @@ db.sync();
 
 const ctrl = require("./controler/Controler");
 
-
+const cron = require("./cron/clear-room");
 
 
 //load router

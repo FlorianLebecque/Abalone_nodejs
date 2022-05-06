@@ -2,7 +2,7 @@
     <div class="row">
         <h1 class="display-1">Rooms
 
-        <a class="btn btn-lg btn-outline-success " href="/add">+</a></h1>
+        <a class="btn btn-lg btn-outline-success " href="/rooms/add">+</a></h1>
 
     </div>
     <div class="row">
@@ -21,7 +21,7 @@
                         <% if(room.player_2 == -1){ %>
                             <th></th>
 
-                            <th><a class="btn  btn-primary" href="/join/<%= room.id %> ">Join</a></th>
+                            <th><a class="btn  btn-primary" href="/rooms/join/<%= room.id %> ">Join</a></th>
                         <% }else{ %>
                             <th><%= room.player_2 %> </th>
                             <th><a class="btn btn-outline-secondary disabled" href="/join/">full</a></th>

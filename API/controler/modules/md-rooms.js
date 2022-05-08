@@ -53,7 +53,8 @@ const md_rooms = {
                 player_1: room_form.player,
                 player_2: -1,
                 passwd  : -1,
-                started : false
+                started : false,
+                createdAt: new Date()
             }
 
             this.rooms.set(new_room.id,new_room);
@@ -87,6 +88,8 @@ const md_rooms = {
 
             room.player_2 = room_form.player
 
+            console.log("room joined");
+
             return room;
 
         }else{
@@ -97,27 +100,56 @@ const md_rooms = {
     async StartRoom(room_form){
 
         try {
-            if(!this.CheckObj(room_form,["player","token","roomId"])){
+            if(!this.CheckObj(room_form,["player","roomId"])){
                 throw {code:400,err:"Incomplete forms"};
             }
         } catch (error) {
             throw {code:400,err:"Incomplete forms"};
         }
 
-        let res = await this.checkToken(room_form.player,room_form.token)
-        if(res){
 
+        try {
             let room = this.rooms.get(room_form.roomId);
+            
+            room.started = false;
+
+            if(room.player_1 == room_form.player){
+                room.started = true;
+            }
+
+            if(room.player_2 == room_form.player){
+                room.started = true;
+            }
 
             
-            room.started = room.player_1 == room_form.player;
-            
-
             return room.started;
-
-        }else{
-            throw {code:403,err:"Invalid user or token or room id"}; 
+        } catch (error) {
+            throw {code:400,err:"Room not found"};
         }
+
+    },
+
+    async EndRoom(room_form){
+
+        try {
+            if(!this.CheckObj(room_form,["player","roomId"])){
+                throw {code:400,err:"Incomplete forms"};
+            }
+        } catch (error) {
+            throw {code:400,err:"Incomplete forms"};
+        }
+
+
+        try {
+            
+            console.log("End room : "+room_form.roomId);
+            this.rooms.delete(room_form.roomId);
+
+            return true;
+        } catch (error) {
+            throw {code:400,err:"Room not found"};
+        }
+
     }
 
 }

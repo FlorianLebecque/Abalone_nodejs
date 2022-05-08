@@ -48,11 +48,25 @@ roomRoute.post("/join",async (req,res) => {
 
 });
 
-roomRoute.post("/started",async (req,res)=>{
+roomRoute.post("/start",async (req,res)=>{
     let room_form = req.body;
 
     try {
         let response = await ctrl.StartRoom(room_form);
+
+        res.json(response);
+        
+        
+    } catch (error) {
+        res.status(error.code).json(error.err);
+    }
+});
+
+roomRoute.post("/end",async (req,res)=>{
+    let room_form = req.body;
+
+    try {
+        let response = await ctrl.EndRoom(room_form);
 
         if(response){
             res.json(response);

@@ -41,6 +41,51 @@ socket.on("start_game", (data) =>{
 
 });
 
+socket.on("end",(data)=>{
+    state = 2;
+});
+
+socket.on("played",(data) => {
+    updateHex(data.board);
+    cur_teamPlay = data.turn;
+    score = data.score;
+});
+
+function sendGame(hex){
+    let current_url = window.location.href;
+    let params = current_url.split("/");
+    
+    socket.emit("play",{
+        roomId: params[params.length - 1],
+        board  : convertHex(hex)
+    });
+}
+
+function convertHex(hex){
+    let int_array = [];
+    hex.forEach(row => {
+        let int_row = [];
+        row.forEach(hexa =>{
+            int_row.push(hexa.team);
+        })
+        int_array.push(int_row);
+    })
+
+    return int_array;
+}
+
+function updateHex(gameArray){
+    let i = 0;
+    hex.forEach(row => {
+        let j = 0;
+        row.forEach(hexa =>{
+            hexa.team = gameArray[i][j];
+            j++
+        })
+        i++;
+    });
+}
+
 document.querySelector('.js-form')?.addEventListener('submit', e => {
     e.preventDefault();
 

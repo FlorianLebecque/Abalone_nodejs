@@ -152,9 +152,9 @@ function endGame() {
   text("VICTOIRE", width/2, height/2);
 
   if (score[0]>score[1]) {
-    text("Jouer 1", width/2, 2 * height/3);
+    text("Joueur 1", width/2, 2 * height/3);
   } else {
-    text("jouer 2", width/2, 2 * height/3);
+    text("joueur 2", width/2, 2 * height/3);
   }
 
 }

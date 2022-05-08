@@ -31,20 +31,43 @@ module.exports = {
                         //the room is already created and we joined it
                     if(player.roomId == room_form.roomId){
 
-                        let info = {
+                        let info_1 = {
                             player_1 : player.player,
                             player_2 : room_form.player,
                             turn : 1
                         }
 
+                        let info_2 = {
+                            player_1 : player.player,
+                            player_2 : room_form.player,
+                            turn : 2
+                        }
 
-                        sckt.emit("start_game",info);   //player 1
-                        socket.emit("start_game",info)  //player 2
+
+                        sckt.emit("start_game",info_1);   //player 1
+
+                        socket.emit("start_game",info_2)  //player 2
                     }
 
                 });
 
                 ctrl.users.set(socket,room_form);
+
+                if(ctrl.rooms.has(room_form.roomId)){
+
+                    let room = ctrl.rooms.get(room_form.roomId);
+                    room.player_2 = socket;
+
+                }else{
+                    ctrl.rooms.set(room_form.roomId,{
+                        player_1 : socket,
+                        player_2 : null,
+                        score : [],
+                        board : [],
+                        turn : room_form.id
+                    });
+                }
+
             }
 
             socket.emit("start_room",{"code":response.status,"msg":data});

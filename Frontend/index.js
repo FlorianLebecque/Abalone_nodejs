@@ -11,6 +11,7 @@ app.use(sessions({
 app.use(Express.urlencoded({extended:true}));
 
 app.use(Express.static('public'))
+app.use(Express.static('node_modules/socket.io'))
 
 //load router
 const fs = require("fs");

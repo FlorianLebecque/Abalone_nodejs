@@ -31,7 +31,7 @@ let BtMenu;
 let BtAbout; 
 
 //etat dans lequel se trouve le jeux  
-let state = 1;   //0 menu  1 jeu   2 fin du jeu  3 about
+//let state = 1;   //0 menu  1 jeu   2 fin du jeu  3 about
 
 
 

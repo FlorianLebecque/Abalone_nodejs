@@ -1,13 +1,42 @@
 <div class="container">
-    <h1>Game</h1>
-    <div id="gamearea"></div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div id="gamearea"></div>
 
+        </div>
+        <div class="col-lg-4 chatbox chatbox-control">
+            <h1>Chat</h1>
+            <div id="msg_box" class="chatbox-msgs">
+                
+            </div>
+            <div>
+                <form class="js-form"> 
+                    <input type="text" name="myText" class="form-control" placeholder="your message">
+                </form>
+            </div>
+        </div>
+
+    </div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.min.js" integrity="sha512-NxocnqsXP3zm0Xb42zqVMvjQIktKEpTIbCXXyhBPxqGZHqhcOXHs4pXI/GoZ8lE+2NJONRifuBpi9DxC58L0Lw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script src="../abalone/Hexagone.js"></script>
-<script src="../abalone/HexaButton.js"></script>
-<script src="../abalone/Geometrie.js"></script>
-<script src="../abalone/Function.js"></script>
-<script src="../abalone/Abalone_Js.js"></script>
+<script>
+    let your_turn = 1;
+    let player_1 = 1;
+    let player_2 = 2;
+    let user = {
+        player : "<%= info.user %>",
+        id : "<%= info.id %>",
+        roomId:"<%=  %>"
+    }
 
+    let state = -1;
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.min.js" integrity="sha512-NxocnqsXP3zm0Xb42zqVMvjQIktKEpTIbCXXyhBPxqGZHqhcOXHs4pXI/GoZ8lE+2NJONRifuBpi9DxC58L0Lw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/abalone/Hexagone.js"></script>
+<script src="/abalone/HexaButton.js"></script>
+<script src="/abalone/Geometrie.js"></script>
+<script src="/abalone/Function.js"></script>
+<script src="/abalone/Abalone_Js.js"></script>
+<script src="/client-dist/socket.io.js"></script>
+<script src="/client_socket.js"></script>

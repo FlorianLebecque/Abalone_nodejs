@@ -45,3 +45,44 @@ nav{
     background-color: #dc3545;
     border-bottom: firebrick solid 0.5em;
 }
+
+.chatbox{
+    padding: 1em;
+    border-radius: 0.2em;
+    box-shadow: 10px 10px 20px -12px rgba(0,0,0,0.3) inset;
+}
+
+.chatbox-control{
+    display: grid;
+    grid-template-rows: min-content 1fr min-content;
+    align-content: stretch;
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+.chatbox-msgs{
+    overflow-y: auto;
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.msg{
+    margin: 1em;
+    padding: 1em;
+    background-color: #c15b78;
+    color: white;
+    border-radius: 0.5em 0.5em 0.5em 0;
+    align-self: flex-start;
+}
+
+.msg-y{
+    margin: 1em;
+    padding: 1em;
+    background-color: #5bb0ba;
+    color: white;
+    border-radius: 0.5em 0.5em 0 0.5em;
+    text-align: end;
+    align-self: flex-end;
+}

@@ -4,8 +4,10 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 module.exports = {
     event:"disconnect",
     function : async (socket,msg = "") => {
-
-        let room = ctrl.rooms.get(ctrl.users.get(socket).roomId);
-        ctrl.EndGame(socket,room)
+        if(ctrl.users.has(socket)){
+            let room = ctrl.rooms.get(ctrl.users.get(socket).roomId);
+            ctrl.EndGame(socket,room)
+        }
+        
     }
 }

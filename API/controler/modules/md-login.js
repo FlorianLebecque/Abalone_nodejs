@@ -82,6 +82,49 @@ const users = {
         }
 
         throw {code:403,err:"User or password incorrect"};
+    },
+
+    async FindUser(find_form){
+        try {
+            if(!this.CheckObj(find_form,["name"])){
+                throw {code:400,err:"Incomplete forms"};
+            }
+        } catch (error) {
+            throw {code:400,err:"Incomplete forms"};
+        }
+
+
+        let users = await User.findAll({attributes:["id","name"],where:{name:{[Op.like]:"%"+find_form.name+"%"}}}).then(data=>{
+            return data;
+        }).catch(err=>{
+            throw {code:500,err:"Internal server error"};
+        })
+
+        return users;
+
+    },
+
+    async GetUser(find_form){
+        try {
+            if(!this.CheckObj(find_form,["id"])){
+                throw {code:400,err:"Incomplete forms"};
+            }
+        } catch (error) {
+            throw {code:400,err:"Incomplete forms"};
+        }
+
+
+        let user = await User.findOne({attributes:["id","name","createdAt"],where:{id:find_form.id}}).then(data=>{
+            return data;
+        }).catch(err=>{
+            throw {code:500,err:"Internal server error"};
+        })
+
+        if(user){
+            return user
+        }
+
+        throw {code:404,err:"Not found"};
     }
 
 };

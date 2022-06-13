@@ -16,8 +16,17 @@ module.exports = {
         let player_2 = ctrl.users.get(room.player_2);
 
 
-        let new_turn = 0;
+            //prevent player to play when it's not his turn
+        if(room.turn != current_user.id){
+            socket.emit("played",{
+                board : room.board,
+                turn : - new_turn + 3,
+                score : room.score
+            });
+            return;
+        }
 
+        let new_turn = 0;
         if(room.turn == player_1.id){
             room.turn = player_2.id;
             new_turn = 2;
@@ -25,16 +34,6 @@ module.exports = {
             room.turn = player_1.id;
             new_turn = 1;
         }
-
-        if(room.turn != current_user.id){
-            socket.emit("played",{
-                board : room.board,
-                turn : - new_turn + 3,
-                score : room.score
-            });
-        }
-
-        
 
         room.board = room_form.board
         room.score = ctrl.ComputeScore(room.board);

@@ -143,8 +143,8 @@ function endGame() {
 
   tSize = round(max_len * 0.03);
   textSize(tSize);
-  text("joueur 1 : " + score[0], width * 0.2, height * 0.41, width * 0.6, height * 0.1);
-  text("joueur 2 : " + score[1], width * 0.2, height * 0.45, width * 0.6, height * 0.1);
+  text(player_1+" : " + score[0], width * 0.2, height * 0.41, width * 0.6, height * 0.1);
+  text(player_2+" : " + score[1], width * 0.2, height * 0.45, width * 0.6, height * 0.1);
 
   tSize = round(max_len * 0.08);
   textSize(tSize);
@@ -152,9 +152,9 @@ function endGame() {
   text("VICTOIRE", width/2, height/2);
 
   if (score[0]>score[1]) {
-    text("Joueur 1", width/2, 2 * height/3);
+    text(player_1, width/2, 2 * height/3);
   } else {
-    text("joueur 2", width/2, 2 * height/3);
+    text(player_2, width/2, 2 * height/3);
   }
 
 }

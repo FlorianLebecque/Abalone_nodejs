@@ -77,7 +77,6 @@ rtUser.post("/login",async (req,res) => {
 
 });
 
-
 rtUser.get("/disconnect",(req,res)=> {
     req.session.userid = -1;
     req.session.token = -1;

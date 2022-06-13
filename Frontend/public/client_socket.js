@@ -1,5 +1,5 @@
 
- window.location.href
+
 
 let socket = io.connect(window.location.hostname+":3002");
 

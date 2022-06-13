@@ -13,7 +13,6 @@ MainRouter.get("/",async (req,res)=>{
     if(req.query.code){
         options["code"] = req.query.code;
     }
-
     if(req.query.msg){
         options["msg"]  = req.query.msg;
     }
@@ -24,7 +23,53 @@ MainRouter.get("/",async (req,res)=>{
 
 });
 
+MainRouter.get("/history",async (req,res)=>{
+    let options = ctrl.GetOption(req);
+
+    if(req.query.code){
+        options["code"] = req.query.code;
+    }
+    if(req.query.msg){
+        options["msg"]  = req.query.msg;
+    }
+
+    options["page"] = "history";
+    
+    let gamehistory = await ctrl.GetGameHistory(req.session.userid);
+    options["gamehistory"] = gamehistory;
+
+    res.render("index.ejs",info = options);
+});
+
+MainRouter.get("/followed",async (req,res)=>{
+    let options = ctrl.GetOption(req);
+
+    if(req.query.code){
+        options["code"] = req.query.code;
+    }
+    if(req.query.msg){
+        options["msg"]  = req.query.msg;
+    }
+
+    options["page"] = "followed";
+
+    let followed_user = await ctrl.GetFollowedUser(ctrl.getCurrentUser(req).name,req.session.token);
+    options["followed_user"] = followed_user;
+
+    res.render("index.ejs",info = options);
+});
+
 MainRouter.get("/login",(req,res)=>{
+
+    let options = ctrl.GetOption(req);
+
+
+    if(req.query.code){
+        options["code"] = req.query.code;
+    }
+    if(req.query.msg){
+        options["msg"]  = req.query.msg;
+    }
 
     let log_info = 0;
     switch(req.query.i){
@@ -39,17 +84,12 @@ MainRouter.get("/login",(req,res)=>{
             break;
     }
 
-    let options = ctrl.GetOption(req);
-    
     options["page"] = "login";
     options["log_info"] = log_info;
 
     console.log(options);
 
-
     res.render("index.ejs",info = options);
-
-
 });
 
 

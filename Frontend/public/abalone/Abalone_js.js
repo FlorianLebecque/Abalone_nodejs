@@ -151,11 +151,21 @@ function endGame() {
   textAlign(CENTER);
   text("VICTOIRE", width/2, height/2);
 
-  if (score[0]>score[1]) {
-    text(player_1, width/2, 2 * height/3);
-  } else {
-    text(player_2, width/2, 2 * height/3);
-  }
+
+    
+    if ((score[0] < 6) && (score[1] < 6)) {     //si l'autre joeur s'est déconnecté avant la fin du jeu
+
+        if(your_turn == 1){
+            text(player_1, width/2, 2 * height/3);
+        }else{
+            text(player_2, width/2, 2 * height/3);
+        }
+
+    }else if (score[0]>score[1]) {              //si le joueur 1 a gagné
+        text(player_1, width/2, 2 * height/3);
+    } else {                                    //si le joueur 2 a gagné
+        text(player_2, width/2, 2 * height/3);
+    }
 
 }
 

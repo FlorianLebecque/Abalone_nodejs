@@ -78,6 +78,32 @@ let ctrl_user = {
             return false; 
         }
         return false;
+    },
+
+    async GetFollowedUser(userName,usertoken){
+        const url = "http://127.0.0.1:3001";
+
+        let headers = {
+            user : userName,
+            token : usertoken
+        }
+
+        const response = await fetch(url+"/user/followed",{
+            method:     "get",
+            headers:    headers
+        });
+
+        const data = await response.json();
+
+        try {
+            if(data.length>0){
+                return data;
+            }
+        } catch (error) {
+            return false; 
+        }
+        return false;
+        
     }
 
 }

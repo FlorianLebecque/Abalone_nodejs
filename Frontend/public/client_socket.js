@@ -18,7 +18,7 @@ socket.on("start_room",(data)=>{
     console.log(data);
 
     if(data.code != 200){
-        //window.location.href = "/?code=400&msg=room not found"
+        window.location.href = "/?code=400&msg=room not found"
     }
 
 });

@@ -77,6 +77,20 @@ roomRoute.post("/end",async (req,res)=>{
     }
 });
 
+roomRoute.get("/history/:userid",async (req,res)=>{
+    let userId = req.params.userid;
+
+    try{
+        let response = await ctrl.GetGameHistory(userId);
+
+        if(response){
+            res.json(response);
+        }
+    } catch (error) {
+        res.status(error.code).json(error.err);
+    }
+});
+
 
 let expt = {
     path:"rooms",

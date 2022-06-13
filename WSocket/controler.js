@@ -28,15 +28,57 @@ class Controler{
 
     }
 
+    /*
+    room = {
+        player_1 : "socket player 1",
+        player_2 : "socket player 2",
+        turn     : "player id",
+        board    : "array",
+        score    : "array",
+        roomId   : "room id",
+        player_1_id : "player 1 id",
+        player_2_id : "player 2 id"
+    }
+
+    player = {
+        roomId : "",
+        player : "user name",
+        id     : "user id"
+    }
+    */
+
+    
+
     async EndGame(socket,room){
         let player = ctrl.users.get(socket);
         
 
         const url = "http://127.0.0.1:3001"
         try {
+
+            let score = ctrl.ComputeScore(room.board);
+            let the_winner_id = 0;
+            if((score[0] != 6)&&(score[1] != 6)){   //a player exited the game before the end
+                
+                if(room.player_1_id == player.id){
+                    the_winner_id = room.player_2_id;
+                }else{
+                    the_winner_id = room.player_1_id;
+                }
+            }
+
+            let bod = {
+                room_id   : room.roomId,
+                id_user_1 : room.player_1_id,
+                id_user_2 : room.player_2_id,
+                score_1   : score[0],
+                score_2   : score[1],
+                winner_id : the_winner_id
+            } 
+
             const response = await fetch(url+"/rooms/end",{
                 method:     "post",
-                body: JSON.stringify(player),
+                body: JSON.stringify(bod),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -57,8 +99,6 @@ class Controler{
                         room.player_2.emit("end",1);
                     }
                 }
-
-                
 
                 ctrl.rooms.delete(player.roomId);
                 ctrl.users.delete(socket);

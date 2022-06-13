@@ -1,0 +1,76 @@
+
+<% if(info.id == -1){ %> 
+    <script>
+        window.location.href = "/login/?code=400&msg=You must be logged in to access this page.";
+    </script>
+<% }%>
+
+<div class="container">
+    <h1>Game history</h1>
+    <!--table of the info.gamehistory-->
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Game ID</th>
+                <th>Status</th>
+                <th>Player 1</th>
+                <th>Player 2</th>
+                <th>Score</th>
+                <th>Game date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% for(var i = 0; i < info.gamehistory.length; i++){ 
+                let score = info.gamehistory[i].score_1 + " - " + info.gamehistory[i].score_2;
+                let roomd_id_display = info.gamehistory[i].room_id.split("-")[0];
+                //format date time
+                let date = new Date(info.gamehistory[i].date);
+                let date_formatted = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
+
+                let player_1_display = "";
+                let player_2_display = "";
+                if(info.gamehistory[i].winner == info.gamehistory.user_1){
+                    player_1_display = "winner";
+                }else{
+                    player_2_display = "winner";
+                }
+
+                let status = ""; //tell if we win or not
+                if(info.user == info.gamehistory[i].winner){
+                    status = "win";
+                }else{
+                    status = "lose";
+                }
+            %>
+
+                <tr>
+                    
+                    <td><%= roomd_id_display %></td>
+                    <td>
+                        <% if(status == "win"){ %>
+                            <span class="badge bg-success">Win</span>
+                        <% }else{ %>
+                            <span class="badge bg-danger">Lose</span>
+                        <% } %>  
+                    </td>
+                    <td>
+                        <% if(player_1_display == "winner"){ %>
+                            <b ><%= info.gamehistory[i].user_1 %></b>
+                        <% }else{ %>
+                            <p ><%= info.gamehistory[i].user_1 %></p>
+                        <% } %>
+                    </td>
+                    
+                    <td>
+                        <% if(player_2_display == "winner"){ %>
+                            <b ><%= info.gamehistory[i].user_2 %></b>
+                        <% }else{ %>
+                            <p ><%= info.gamehistory[i].user_2 %></p>
+                        <% } %>
+                    </td>
+                    <td><%= score %></td>
+                    <td><%= date_formatted %></td>
+                </tr>
+            <% } %>
+    </table>
+</div>

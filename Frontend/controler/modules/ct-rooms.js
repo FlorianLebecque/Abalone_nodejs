@@ -57,6 +57,17 @@ const ct_rooms = {
         }else{
             throw {"code":response.status,"msg":data}
         }
+    },
+
+    async GetGameHistory(userId){
+        const url = "http://127.0.0.1:3001";
+
+        const response = await fetch(url+"/rooms/history/"+userId,{
+            method:     "get",
+        });
+
+        const data = await response.json(); 
+        return data;
     }
     
 }

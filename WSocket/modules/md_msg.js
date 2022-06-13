@@ -1,6 +1,5 @@
 const ctrl = require("../controler");
 
-var sanitizer = require('sanitize')();
 
 module.exports = {
     event:"msg",

@@ -2,22 +2,19 @@
 :root {
     --textColor: #fff;
     --white: #ffffff;
-  }
-
-
-body{
-    /*
-    background-image: url("back.png");
-    color: var(--textColor);
-    */
 }
 
-nav{
-    /*
-    box-shadow: 10px 10px 49px 4px rgba(255,255,255,0.29);
-    -webkit-box-shadow: 10px 10px 49px 4px rgba(255,255,255,0.29);
-    -moz-box-shadow: 10px 10px 49px 4px rgba(255,255,255,0.29);
-    */
+html{
+    background-image: url(back.png);
+}
+
+body{
+    color-scheme: dark;
+    margin: 5em;
+    padding: 2em;
+    border-radius: 1em;
+    box-shadow: 10px 10px 49px 4px rgba(0, 0, 0, 0.29);
+    height: 90vh;
 }
 
 .loginbar{
@@ -50,6 +47,7 @@ nav{
     padding: 1em;
     border-radius: 0.2em;
     box-shadow: 10px 10px 20px -12px rgba(0,0,0,0.3) inset;
+    height: 30vh;
 }
 
 .chatbox-control{

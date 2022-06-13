@@ -18,9 +18,12 @@ module.exports = {
     event:"disconnect",
     function : async (socket,msg = "") => {
         if(ctrl.users.has(socket)){
-            let room = ctrl.rooms.get(ctrl.users.get(socket).roomId);
 
-            ctrl.EndGame(socket,room)
+            if(ctrl.rooms.has(ctrl.users.get(socket).roomId)){
+                let room = ctrl.rooms.get(ctrl.users.get(socket).roomId);
+
+                ctrl.EndGame(socket,room)
+            }
         }
         
     }

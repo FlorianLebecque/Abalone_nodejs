@@ -11,12 +11,12 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Game ID</th>
+                <th>Room</th>
                 <th>Status</th>
                 <th>Player 1</th>
                 <th>Player 2</th>
                 <th>Score</th>
-                <th>Game date</th>
+                <th>Date</th>
             </tr>
         </thead>
         <tbody>
@@ -27,13 +27,7 @@
                 let date = new Date(info.gamehistory[i].date);
                 let date_formatted = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes();
 
-                let player_1_display = "";
-                let player_2_display = "";
-                if(info.gamehistory[i].winner == info.gamehistory.user_1){
-                    player_1_display = "winner";
-                }else{
-                    player_2_display = "winner";
-                }
+                
 
                 let status = ""; //tell if we win or not
                 if(info.user == info.gamehistory[i].winner){
@@ -54,7 +48,7 @@
                         <% } %>  
                     </td>
                     <td>
-                        <% if(player_1_display == "winner"){ %>
+                        <% if(info.gamehistory[i].user_1 == info.user){ %>
                             <b ><%= info.gamehistory[i].user_1 %></b>
                         <% }else{ %>
                             <p ><%= info.gamehistory[i].user_1 %></p>
@@ -62,7 +56,7 @@
                     </td>
                     
                     <td>
-                        <% if(player_2_display == "winner"){ %>
+                        <% if(info.gamehistory[i].user_2 == info.user){ %>
                             <b ><%= info.gamehistory[i].user_2 %></b>
                         <% }else{ %>
                             <p ><%= info.gamehistory[i].user_2 %></p>

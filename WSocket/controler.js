@@ -59,11 +59,16 @@ class Controler{
             let score = ctrl.ComputeScore(room.board);
             let the_winner_id = 0;
             if((score[0] != 6)&&(score[1] != 6)){   //a player exited the game before the end
-                
                 if(room.player_1_id == player.id){
                     the_winner_id = room.player_2_id;
                 }else{
                     the_winner_id = room.player_1_id;
+                }
+            }else{
+                if(score[0] == 6){
+                    the_winner_id = room.player_1_id;
+                }else{
+                    the_winner_id = room.player_2_id;
                 }
             }
 

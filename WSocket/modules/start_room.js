@@ -1,6 +1,26 @@
 const ctrl = require("../controler");
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
+/*
+let room_form = {
+    roomId : "",
+    player : "user name",
+    id     : "user id"
+}
+*/
+/*
+room = {
+    player_1 : "socket player 1",
+    player_2 : "socket player 2",
+    turn     : "player id",
+    board    : "array",
+    score    : "array",
+    roomId   : "room id",
+    player_1_id : "player 1 id",
+    player_2_id : "player 2 id"
+}
+*/
+
 module.exports = {
     event:"start_room",
     function : async (socket,room_form) => {
@@ -57,14 +77,16 @@ module.exports = {
 
                     let room = ctrl.rooms.get(room_form.roomId);
                     room.player_2 = socket;
-
+                    room.player_2_id = room_form.id;
                 }else{
                     ctrl.rooms.set(room_form.roomId,{
                         player_1 : socket,
                         player_2 : null,
                         score : [],
                         board : [],
-                        turn : room_form.id
+                        turn : room_form.id,
+                        roomId : room_form.roomId,
+                        player_1_id : room_form.id,
                     });
                 }
 

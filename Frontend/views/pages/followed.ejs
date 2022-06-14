@@ -1,0 +1,17 @@
+<% if(info.id == -1){ %> 
+    <script>
+        window.location.href = "/login/?code=400&msg=You must be logged in to access this page.";
+    </script>
+<% }%>
+
+<div class="container">
+    <h1 class="display-1">Followed</h1>
+    <!--table of the info.followed_user-->
+    <div class="list-group">
+
+        <% for(var i = 0; i < info.followed_user.length; i++){ %>
+                
+                <a class="list-group-item list-group-item-action btn-primary" href="/history/<%= info.followed_user[i].id %>"><%= info.followed_user[i].name %></a>
+        <% } %>
+    </div>
+</div>

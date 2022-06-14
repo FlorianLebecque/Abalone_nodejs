@@ -94,7 +94,15 @@ const follows = {
             throw {code:500,err:"Internal server error"};
         })
 
-        return follows;
+        //for each followed user, get the user info
+        let users = [];
+        for(let i = 0; i < follows.length; i++){
+            let user = await this.GetUser({id:follows[i].id_user_2});
+            users.push(user);
+        }
+
+
+        return users;
     }    
 
 

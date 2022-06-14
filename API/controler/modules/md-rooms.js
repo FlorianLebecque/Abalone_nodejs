@@ -181,7 +181,7 @@ const md_rooms = {
 
 
     async GetGameHistory(userId){
-        //sequilize -> find all rooms where user is player_1 or player_2
+        //sequelize -> find all rooms where user is player_1 or player_2
         let rooms = await Room.findAll({where:{[Op.or]:[{id_user_1:userId},{id_user_2:userId}]}}).then(rooms => {
             return rooms;
         });
@@ -202,6 +202,14 @@ const md_rooms = {
                 room.winner_name = user_1;
             }else{
                 room.winner_name = user_2;
+            }
+
+            //if score = 14 -> set score to 0
+            if(room.score_1 == 14){
+                room.score_1 = 0;
+            }
+            if(room.score_2 == 14){
+                room.score_2 = 0;
             }
 
             rooms_with_names.push({

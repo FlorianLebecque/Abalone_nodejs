@@ -104,6 +104,19 @@ let ctrl_user = {
         }
         return false;
         
+    },
+
+    async SearchUser(searchParam){
+        const url = "http://127.0.0.1:3001/user/s/"+searchParam;
+
+        const response = await fetch(url,{
+            method:     "get",
+            headers:    { 'Content-Type':'application/json'}
+        });
+
+        const data = await response.json();
+
+        return data;
     }
 
 }

@@ -1,0 +1,18 @@
+
+
+<div class="container">
+    <h1 class="display-1">Results</h1>
+    <!--table of the info.followed_user-->
+    <div class="list-group">
+
+        <% for(var i = 0; i < info.users.length; i++){ %>
+            
+            <div class="btn-group" style="margin-bottom: 1em;">
+                <a class="btn btn-outline-primary col-11" href="/history/<%= info.users[i].id %>"><%= info.users[i].name %></a>
+                <a class="btn btn-success col-1" href="/follow/<%= info.users[i].id %>">Follow</a>
+
+            </div>
+
+        <% } %>
+    </div>
+</div>

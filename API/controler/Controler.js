@@ -21,7 +21,7 @@ class Controler{
         return key_array.every(function(val) { return Object.keys(obj).indexOf(val) >= 0; })
     }
 
-    async checkToken(username,usr_token){
+    async CheckToken(username,usr_token){
 
         let user = await User.findOne({where:{name:username,token:usr_token}}).then(data=>{
             return data;

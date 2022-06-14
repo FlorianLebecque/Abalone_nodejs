@@ -88,7 +88,7 @@ let ctrl_user = {
             token : usertoken
         }
 
-        const response = await fetch(url+"/user/followed",{
+        const response = await fetch(url+"/user/follow",{
             method:     "get",
             headers:    headers
         });

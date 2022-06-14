@@ -45,7 +45,7 @@ const md_rooms = {
             throw {code:400,err:"Incomplete forms"};
         }
 
-        let res = await this.checkToken(room_form.player,room_form.token)
+        let res = await this.CheckToken(room_form.player,room_form.token)
         if(res){
 
             if(this.IsPlayerInRoom(room_form.player)){
@@ -81,7 +81,7 @@ const md_rooms = {
             throw {code:400,err:"Incomplete forms"};
         }
 
-        let res = await this.checkToken(room_form.player,room_form.token)
+        let res = await this.CheckToken(room_form.player,room_form.token)
         if(res){
 
             if(this.IsPlayerInRoom(room_form.player)){

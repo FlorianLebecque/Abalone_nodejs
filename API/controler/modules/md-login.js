@@ -2,6 +2,8 @@
 const User = require("../../models/user");
 const Str = require("@supercharge/strings");
 
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 const users = {
 

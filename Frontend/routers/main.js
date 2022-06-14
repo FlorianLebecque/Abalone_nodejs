@@ -23,6 +23,31 @@ MainRouter.get("/",async (req,res)=>{
 
 });
 
+MainRouter.get("/search",async (req,res)=>{
+    
+    let options = ctrl.GetOption(req);
+
+    if(req.query.code){
+        options["code"] = req.query.code;
+    }
+    if(req.query.msg){
+        options["msg"]  = req.query.msg;
+    }
+
+    options["page"] = "search";
+
+    searchParam = req.query.search;
+    if(searchParam){
+        let users = await ctrl.SearchUser(searchParam);
+        options["users"] = users;
+    }else{
+        options["code"] = "404";
+        options["msg"] = "No search param";
+    }
+
+    res.render("index.ejs",info = options);
+});
+
 MainRouter.get("/history",async (req,res)=>{
     let options = ctrl.GetOption(req);
 
@@ -36,6 +61,24 @@ MainRouter.get("/history",async (req,res)=>{
     options["page"] = "history";
     
     let gamehistory = await ctrl.GetGameHistory(req.session.userid);
+    options["gamehistory"] = gamehistory;
+
+    res.render("index.ejs",info = options);
+});
+
+MainRouter.get("/history/:id",async (req,res)=>{
+    let options = ctrl.GetOption(req);
+
+    if(req.query.code){
+        options["code"] = req.query.code;
+    }
+    if(req.query.msg){
+        options["msg"]  = req.query.msg;
+    }
+
+    options["page"] = "history";
+    
+    let gamehistory = await ctrl.GetGameHistory(req.params.id);
     options["gamehistory"] = gamehistory;
 
     res.render("index.ejs",info = options);

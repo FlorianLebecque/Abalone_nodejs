@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: abalone
+      MYSQL_USER: dmy
+      MYSQL_PASSWORD: 123
+    volumes:
+      - ./API/abalone.sql:/docker-entrypoint-initdb.d/abalone.sql
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "dmy", "-p123" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: API.dockerfile
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: development
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: on-failure:3
+
+volumes:
+  mysql_data:

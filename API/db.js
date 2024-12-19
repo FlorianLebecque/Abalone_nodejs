@@ -4,8 +4,8 @@ const db = new Sequilize(
     "dmy",
     "123",
     {
-        dialect:"mysql",
-        host:"localhost"
+        dialect: "mysql",
+        host: "db"
     }
 );
 

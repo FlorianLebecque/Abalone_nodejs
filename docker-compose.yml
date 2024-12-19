@@ -11,8 +11,7 @@ services:
     volumes:
       - ./API/abalone.sql:/docker-entrypoint-initdb.d/abalone.sql
       - mysql_data:/var/lib/mysql
-    ports:
-      - "3306:3306"
+    network_mode: "host"
     healthcheck:
       test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "dmy", "-p123" ]
       interval: 5s
@@ -23,32 +22,32 @@ services:
     build:
       context: .
       dockerfile: API.dockerfile
-    ports:
-      - "3001:3001"
     environment:
       NODE_ENV: development
     depends_on:
       db:
         condition: service_healthy
     restart: on-failure:3
-    # healthcheck:
-    #   test: [ "CMD", "curl", "-f", "http://localhost:3001", "||", "exit", "1" ]
-    #   interval: 1m30s
-    #   timeout: 30s
-    #   retries: 5
-    #   start_period: 30s
+    network_mode: "host"
 
   websocket:
     build:
       context: .
       dockerfile: WSocket.dockerfile
-    ports:
-      - "3002:3002"
+    network_mode: "host"
+
     environment:
       NODE_ENV: development
-    # depends_on:
-    #   api:
-    #     condition: service_healthy
+    restart: on-failure:3
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Frontend.dockerfile
+    network_mode: "host"
+
+    environment:
+      NODE_ENV: development
     restart: on-failure:3
 
 volumes:

@@ -1,9 +1,9 @@
 
 
 
-let socket = io.connect(window.location.hostname+":3002");
+let socket = io.connect("ws." + window.location.hostname + ":444");
 
-socket.on('connect',(data) => {
+socket.on('connect', (data) => {
 
     let current_url = window.location.href;
 
@@ -11,28 +11,28 @@ socket.on('connect',(data) => {
 
     user.roomId = params[params.length - 1]
 
-    socket.emit("start_room",user);
+    socket.emit("start_room", user);
 });
 
-socket.on("start_room",(data)=>{
+socket.on("start_room", (data) => {
     console.log(data);
 
-    if(data.code != 200){
+    if (data.code != 200) {
         window.location.href = "/?code=400&msg=room not found"
     }
 
 });
 
-socket.on("new_message",(data)=>{
+socket.on("new_message", (data) => {
     let box = document.getElementById("msg_box");
-    
-    let new_msg = "<div class='msg'>"+data+"</div>";
+
+    let new_msg = "<div class='msg'>" + data + "</div>";
 
     box.innerHTML += new_msg;
 
 });
 
-socket.on("start_game", (data) =>{
+socket.on("start_game", (data) => {
 
     your_turn = data.turn;
     player_1 = data.player_1;
@@ -41,31 +41,31 @@ socket.on("start_game", (data) =>{
 
 });
 
-socket.on("end",(data)=>{
+socket.on("end", (data) => {
     state = 2;
 });
 
-socket.on("played",(data) => {
+socket.on("played", (data) => {
     updateHex(data.board);
     cur_teamPlay = data.turn;
     score = data.score;
 });
 
-function sendGame(hex){
+function sendGame(hex) {
     let current_url = window.location.href;
     let params = current_url.split("/");
-    
-    socket.emit("play",{
+
+    socket.emit("play", {
         roomId: params[params.length - 1],
-        board  : convertHex(hex)
+        board: convertHex(hex)
     });
 }
 
-function convertHex(hex){
+function convertHex(hex) {
     let int_array = [];
     hex.forEach(row => {
         let int_row = [];
-        row.forEach(hexa =>{
+        row.forEach(hexa => {
             int_row.push(hexa.team);
         })
         int_array.push(int_row);
@@ -74,11 +74,11 @@ function convertHex(hex){
     return int_array;
 }
 
-function updateHex(gameArray){
+function updateHex(gameArray) {
     let i = 0;
     hex.forEach(row => {
         let j = 0;
-        row.forEach(hexa =>{
+        row.forEach(hexa => {
             hexa.team = gameArray[i][j];
             j++
         })
@@ -90,12 +90,12 @@ document.querySelector('.js-form')?.addEventListener('submit', e => {
     e.preventDefault();
 
     let box = document.getElementById("msg_box");
-    
-    let new_msg = "<div class='msg-y'>"+e.currentTarget.myText.value+"</div>";
+
+    let new_msg = "<div class='msg-y'>" + e.currentTarget.myText.value + "</div>";
 
     box.innerHTML += new_msg;
 
-    socket.emit("msg",e.currentTarget.myText.value);
+    socket.emit("msg", e.currentTarget.myText.value);
 
     e.currentTarget.myText.value = "";
 });

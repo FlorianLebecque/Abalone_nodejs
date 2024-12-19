@@ -5,7 +5,7 @@ const db = new Sequilize(
     "123",
     {
         dialect: "mysql",
-        host: "db"
+        host: "localhost",
     }
 );
 

@@ -12,6 +12,9 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+### BUN ###
+API/bun.lockdb
+
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
@@ -164,3 +167,5 @@ dist
 # Support for Project snippet scope
 
 # End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode
+API/bun.lockb
+API/package-lock.json
